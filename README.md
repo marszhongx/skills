@@ -1,31 +1,26 @@
 # skills
 
-个人 agent skill 集合，布局遵循 [skills.sh](https://skills.sh) 约定：`skills/<name>/SKILL.md`，可直接被 `npx skills` 发现。
+Agent skills I maintain, in the layout skills.sh expects, so `npx skills` can install them.
 
-## 安装
+## Install
 
 ```bash
-# 装全部（当前项目）
-npx skills add marszhongx/skills --all
-
-# 装单个，全局可用
-npx skills add marszhongx/skills --skill pi-model-config -g
-
-# 先看看仓库里有什么
-npx skills add marszhongx/skills --list
+npx skills add marszhongx/skills --list                        # see what is in the repo
+npx skills add marszhongx/skills --skill pi-model-config -g    # one skill, available in every project
+npx skills add marszhongx/skills --all                         # everything, into the current project
 ```
 
-装完更新用 `npx skills update`，卸载用 `npx skills remove`。`-a` 可指定 agent（如 `-a claude-code`、`-a pi`），不指定则交互选择或按已检测到的 agent 安装。
+Add `-a <agent>` to target a specific agent, for example `-a claude-code` or `-a pi`. Without it the CLI asks, or installs to the agents it detects. `npx skills update` pulls newer versions and `npx skills remove` uninstalls.
 
-## 目录
+## Skills
 
-| skill | 用途 |
+| Skill | What it does |
 | --- | --- |
-| `pi-model-config` | 维护 pi 的自定义 provider/模型配置（`~/.pi/agent/models.json`、`defaultThinkingLevel`）：同步网关模型列表、新增 provider、查模型规格、配 thinking 级别 |
+| `pi-model-config` | Keeps pi's custom provider and model config current in `~/.pi/agent/models.json`, plus `defaultThinkingLevel` in settings: syncing a gateway's model list, adding a provider, looking up specs, setting thinking levels |
 
-## 本地开发
+## Working on a skill
 
 ```bash
-npx skills add ./ --list          # 校验发现结果
-npx skills add ./ --skill <name> -y --copy   # 本地试装
+npx skills add ./ --list                             # check what the CLI discovers
+npx skills add ./ --skill pi-model-config -y --copy  # local test install
 ```
